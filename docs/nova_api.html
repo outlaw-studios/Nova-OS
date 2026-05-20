@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova API Reference v1.0</title>
+    <style>
+        :root { --bg: #0a0a1a; --card: #12122a; --text: #e0e0f0; --accent: #4a9eff; --secondary: #ff6b6b; --border: #2a2a5a; --green: #6bff6b; --orange: #ffa500; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; padding: 40px; max-width: 1000px; margin: 0 auto; }
+        h1 { color: var(--accent); font-size: 42px; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+        h2 { color: var(--secondary); font-size: 28px; margin-top: 50px; border-left: 4px solid var(--secondary); padding-left: 15px; }
+        h3 { color: #a0d0ff; font-size: 20px; margin-top: 30px; font-family: 'Consolas', monospace; }
+        p { margin: 8px 0; color: #b0b0d0; }
+        code { background: #1a1a3a; padding: 2px 8px; border-radius: 4px; color: var(--green); font-family: 'Consolas', monospace; font-size: 14px; }
+        pre { background: #0d0d20; padding: 20px; border-radius: 10px; border: 1px solid var(--border); overflow-x: auto; margin: 15px 0; font-size: 14px; }
+        .param { color: var(--orange); font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { padding: 10px 15px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { color: var(--accent); }
+        nav { position: sticky; top: 20px; background: var(--card); padding: 15px 20px; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 30px; }
+        nav a { color: var(--accent); margin-right: 20px; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<h1>🚀 Nova API Reference v1.0</h1>
+<p>Complete documentation for Nova Game Engine Lua scripting.</p>
+
+<nav>
+    <a href="#2d">2D Graphics</a>
+    <a href="#3d">3D Graphics</a>
+    <a href="#audio">Audio</a>
+    <a href="#keyboard">Keyboard</a>
+    <a href="#mouse">Mouse</a>
+    <a href="#gamepad">Gamepad</a>
+    <a href="#touch">Touch</a>
+    <a href="#window">Window</a>
+    <a href="#system">System</a>
+</nav>
+
+<h2 id="2d">🎨 2D Graphics</h2>
+
+<h3>nova_2d_clear(r, g, b)</h3>
+<p>Clears the screen with a solid color.</p>
+<pre><code>nova_2d_clear(10, 10, 40)  -- Dark blue background</code></pre>
+
+<h3>nova_2d_rect(x, y, w, h, r, g, b, a?)</h3>
+<p>Draws a filled rectangle.</p>
+<table>
+    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+    <tr><td><span class="param">x, y</span></td><td>number</td><td>Position</td></tr>
+    <tr><td><span class="param">w, h</span></td><td>number</td><td>Width and height</td></tr>
+    <tr><td><span class="param">r, g, b</span></td><td>number</td><td>Color (0-255)</td></tr>
+    <tr><td><span class="param">a</span></td><td>number (optional)</td><td>Alpha (0-255, default 255)</td></tr>
+</table>
+<pre><code>nova_2d_rect(100, 200, 50, 50, 255, 0, 0)       -- Red square
+nova_2d_rect(200, 200, 50, 50, 255, 0, 0, 128)   -- Semi-transparent</code></pre>
+
+<h3>nova_2d_circle(cx, cy, radius, r, g, b)</h3>
+<p>Draws a filled circle.</p>
+<pre><code>nova_2d_circle(400, 300, 30, 255, 255, 0)  -- Yellow circle</code></pre>
+
+<h3>nova_2d_line(x1, y1, x2, y2, r, g, b)</h3>
+<p>Draws a line between two points.</p>
+<pre><code>nova_2d_line(0, 0, 800, 600, 255, 255, 255)  -- Diagonal line</code></pre>
+
+<h3>nova_2d_text(text, x, y, size?)</h3>
+<p>Draws text on screen. size: "small" | "normal" | "big"</p>
+<pre><code>nova_2d_text("Hello Nova!", 100, 100)
+nova_2d_text("Big Title", 200, 50, "big")
+nova_2d_text("Small info", 10, 580, "small")</code></pre>
+
+<h3>nova_2d_image(filename, x, y, w?, h?)</h3>
+<p>Draws a PNG/JPG image from the game folder.</p>
+<pre><code>nova_2d_image("player.png", 100, 200)
+nova_2d_image("bg.jpg", 0, 0, 1920, 1080)</code></pre>
+
+<h2 id="3d">🧊 3D Graphics</h2>
+
+<h3>nova_3d_clear(r, g, b)</h3>
+<p>Clears the 3D viewport.</p>
+
+<h3>nova_3d_camera(cx, cy, cz, tx, ty, tz)</h3>
+<p>Sets camera position and look target.</p>
+<pre><code>nova_3d_camera(0, 5, 10, 0, 0, 0)  -- Camera at (0,5,10) looking at (0,0,0)</code></pre>
+
+<h3>nova_3d_cube(x, y, z, size, r, g, b)</h3>
+<p>Draws a colored cube.</p>
+<pre><code>nova_3d_cube(0, 0, -5, 1, 255, 100, 50)  -- Orange cube</code></pre>
+
+<h3>nova_3d_sphere(x, y, z, radius, r, g, b, slices?, stacks?)</h3>
+<p>Draws a sphere.</p>
+<pre><code>nova_3d_sphere(0, 2, -5, 0.5, 100, 200, 255)
+nova_3d_sphere(3, 1, -5, 0.5, 255, 100, 100, 32, 32)  -- High detail</code></pre>
+
+<h3>nova_3d_light(x, y, z, r, g, b)</h3>
+<p>Enables lighting at position.</p>
+<pre><code>nova_3d_light(5, 10, 5, 255, 255, 255)  -- White light from above</code></pre>
+
+<h2 id="audio">🔊 Audio</h2>
+
+<h3>nova_audio_play(filename, volume?)</h3>
+<p>Plays a sound effect. volume: 0.0 to 1.0</p>
+<pre><code>nova_audio_play("jump.wav")
+nova_audio_play("explosion.ogg", 0.7)</code></pre>
+
+<h3>nova_audio_music(filename, loop?, volume?)</h3>
+<p>Plays background music.</p>
+<pre><code>nova_audio_music("bgm.mp3", true)         -- Loop forever
+nova_audio_music("intro.ogg", false, 0.5)  -- Play once, half volume</code></pre>
+
+<h3>nova_audio_stop()</h3>
+<p>Stops music.</p>
+
+<h3>nova_audio_pause() / nova_audio_resume()</h3>
+<p>Pause/Resume music.</p>
+
+<h3>nova_audio_volume(v)</h3>
+<p>Sets master volume (0.0 to 1.0).</p>
+
+<h2 id="keyboard">⌨️ Keyboard</h2>
+
+<h3>nova_key_down(key) → bool</h3>
+<p>Returns true while key is held down.</p>
+<h3>nova_key_pressed(key) → bool</h3>
+<p>Returns true only on the frame the key was pressed.</p>
+<h3>nova_key_any() → bool</h3>
+<p>Returns true if ANY key is currently down.</p>
+
+<table>
+    <tr><th>Key</th><th>Description</th></tr>
+    <tr><td><code>"a"</code> to <code>"z"</code></td><td>Letter keys</td></tr>
+    <tr><td><code>"0"</code> to <code>"9"</code></td><td>Number keys</td></tr>
+    <tr><td><code>"f1"</code> to <code>"f12"</code></td><td>Function keys</td></tr>
+    <tr><td><code>"space"</code>, <code>"enter"</code>, <code>"escape"</code></td><td>Special keys</td></tr>
+    <tr><td><code>"up"</code>, <code>"down"</code>, <code>"left"</code>, <code>"right"</code></td><td>Arrow keys</td></tr>
+    <tr><td><code>"shift"</code>, <code>"ctrl"</code>, <code>"alt"</code></td><td>Modifier keys</td></tr>
+</table>
+
+<h2 id="mouse">🖱️ Mouse</h2>
+
+<h3>nova_mouse_x() / nova_mouse_y() → number</h3>
+<p>Absolute mouse position.</p>
+
+<h3>nova_mouse_dx() / nova_mouse_dy() → number</h3>
+<p>Relative mouse movement (for FPS camera).</p>
+
+<h3>nova_mouse_wheel() → number</h3>
+<p>Scroll wheel movement (+1 up, -1 down).</p>
+
+<h3>nova_mouse_down(btn) / nova_mouse_pressed(btn) → bool</h3>
+<p>btn: 0=Left, 1=Middle, 2=Right</p>
+
+<h3>nova_mouse_lock(bool)</h3>
+<p>Locks mouse to window center (FPS mode).</p>
+
+<h3>nova_mouse_visible(bool)</h3>
+<p>Shows or hides cursor.</p>
+
+<h2 id="gamepad">🎮 Gamepad</h2>
+<p>Supports up to 4 controllers (Xbox, PlayStation, Generic).</p>
+
+<h3>nova_gamepad_count() → number</h3>
+<h3>nova_gamepad_connected(id?) → bool</h3>
+<h3>nova_gamepad_axis(id?, axis) → number (-1.0 to 1.0)</h3>
+<p>axis: 0=LeftX, 1=LeftY, 2=RightX, 3=RightY, 4=LT, 5=RT</p>
+<h3>nova_gamepad_down(id?, btn) → bool</h3>
+<p>btn: 0=A, 1=B, 2=X, 3=Y, 4=Back, 6=Start</p>
+<h3>nova_gamepad_name(id?) → string</h3>
+
+<h2 id="touch">👆 Touch</h2>
+<h3>nova_touch_count() → number</h3>
+<h3>nova_touch_x(id) / nova_touch_y(id) → number</h3>
+
+<h2 id="window">🪟 Window</h2>
+<h3>nova_window_fullscreen(bool)</h3>
+<h3>nova_window_title("text")</h3>
+<h3>nova_window_size() → w, h</h3>
+<h3>nova_window_vsync(bool)</h3>
+
+<h2 id="system">⚙️ System</h2>
+<h3>nova_system_time() → number</h3>
+<p>Time in seconds since game started.</p>
+<h3>nova_system_quit()</h3>
+<p>Immediately exits the game.</p>
+<h3>nova_print(msg)</h3>
+<p>Prints to console.</p>
+<h3>nova_log(msg)</h3>
+<p>Writes to log file.</p>
+
+</body>
+</html>
