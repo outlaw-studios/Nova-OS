@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Game Engine</title>
+    <style>
+        :root { --bg: #0a0a1a; --card: #12122a; --text: #e0e0f0; --accent: #4a9eff; --secondary: #ff6b6b; --border: #2a2a5a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: #0d0d2b; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 28px; font-weight: bold; color: var(--accent); }
+        .logo span { color: var(--secondary); }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav a { color: #c0c0e0; text-decoration: none; font-size: 16px; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
+        .hero { text-align: center; padding: 120px 20px; background: linear-gradient(135deg, #0a0a2e, #1a1a4e); }
+        .hero h1 { font-size: 64px; color: var(--accent); }
+        .hero h1 span { color: var(--secondary); }
+        .hero p { font-size: 22px; color: #a0a0d0; margin: 20px 0 40px; }
+        .btn { display: inline-block; padding: 15px 40px; border-radius: 30px; font-size: 18px; text-decoration: none; margin: 10px; transition: 0.3s; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-primary:hover { background: #3a8eef; transform: scale(1.05); }
+        .btn-outline { border: 2px solid var(--accent); color: var(--accent); }
+        .btn-outline:hover { background: var(--accent); color: white; }
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 80px 60px; max-width: 1200px; margin: 0 auto; }
+        .feature { background: var(--card); padding: 30px; border-radius: 15px; border: 1px solid var(--border); text-align: center; transition: 0.3s; }
+        .feature:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .feature .icon { font-size: 48px; margin-bottom: 15px; }
+        .feature h3 { color: var(--accent); margin-bottom: 10px; }
+        .code-section { padding: 80px 60px; max-width: 900px; margin: 0 auto; text-align: center; }
+        .code-section h2 { color: var(--secondary); font-size: 36px; margin-bottom: 30px; }
+        .code-block { background: #0d0d20; border: 1px solid var(--border); border-radius: 10px; padding: 25px; text-align: left; font-family: 'Consolas', monospace; overflow-x: auto; }
+        .keyword { color: #ff6b6b; } .string { color: #6bff6b; } .comment { color: #666; }
+        footer { text-align: center; padding: 30px; background: #0d0d2b; border-top: 1px solid var(--border); color: #666; }
+    </style>
+</head>
+<body>
+<nav>
+    <div class="logo">Nova<span>.</span></div>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="../docs/nova_api.html">Docs</a></li>
+        <li><a href="https://github.com/outlaw-studios/Nova-OS/releases">Download</a></li>
+        <li><a href="https://github.com/outlaw-studios/Nova-OS">GitHub</a></li>
+    </ul>
+</nav>
+<section class="hero">
+    <h1>Nova<span>.</span></h1>
+    <p>A lightweight, fast game engine. Write games in Lua, run anywhere.</p>
+    <a href="https://github.com/outlaw-studios/Nova-OS/releases" class="btn btn-primary">Download SDK</a>
+    <a href="../docs/nova_api.html" class="btn btn-outline">Documentation</a>
+</section>
+<section class="features">
+    <div class="feature"><div class="icon">⚡</div><h3>Lightweight</h3><p>Under 5MB. Runs on any Windows PC.</p></div>
+    <div class="feature"><div class="icon">🎮</div><h3>2D + 3D</h3><p>OpenGL-powered 2D and 3D rendering.</p></div>
+    <div class="feature"><div class="icon">⌨️</div><h3>Full Input</h3><p>Keyboard, mouse, gamepad (4 players), touch.</p></div>
+    <div class="feature"><div class="icon">🔊</div><h3>Audio</h3><p>Sound effects and music (WAV, MP3, OGG).</p></div>
+    <div class="feature"><div class="icon">📦</div><h3>Single File Export</h3><p>Package games into one .nova file.</p></div>
+    <div class="feature"><div class="icon">💻</div><h3>Nova Core OS</h3><p>Dedicated gaming OS coming soon.</p></div>
+</section>
+<section class="code-section">
+    <h2>Code Example</h2>
+    <div class="code-block">
+<span class="comment">-- Your first Nova game</span><br>
+<span class="keyword">function</span> update(dt)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> nova_key_down(<span class="string">"right"</span>) <span class="keyword">then</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;player.x = player.x + <span class="string">200</span> * dt<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">end</span><br>
+<span class="keyword">end</span><br><br>
+<span class="keyword">function</span> draw()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nova_2d_clear(<span class="string">10</span>, <span class="string">10</span>, <span class="string">40</span>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;nova_2d_rect(player.x, player.y, <span class="string">50</span>, <span class="string">50</span>, <span class="string">255</span>, <span class="string">100</span>, <span class="string">50</span>)<br>
+<span class="keyword">end</span>
+    </div>
+</section>
+<footer><p>&copy; 2026 Nova Game Engine. MIT License.</p></footer>
+</body>
+</html>
